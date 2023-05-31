@@ -1,1 +1,71 @@
 {% extends 'base.html' %}
+
+{% block content %}
+
+<div class="home-container">
+
+  <div class="sidebar">
+    <form action="" method="get">
+      <h4>Categories:</h4>
+      {% for category in categories %}
+        <div>
+          <input type="checkbox" id="{{ category.id }}" name="category" value="{{ category.name }}" {% if category.id in selected_categories %}checked{% endif %}>
+          <label for="{{ category.id }}">{{ category.name }}</label>
+        </div>
+      {% endfor %}
+  
+      <h4>Sellers:</h4>
+      {% for seller in sellers %}
+        <div>
+          <input type="checkbox" id="{{ seller.id }}" name="seller" value="{{ seller.name }}" {% if seller.id in selected_sellers %}checked{% endif %}>
+          <label for="{{ seller.id }}">{{ seller.name }}</label>
+        </div>
+      {% endfor %}
+  
+      <h4>Warranty:</h4>
+      {% for warranty in warranties %}
+        <div>
+          <input type="checkbox" id="{{ warranty.id }}" name="warranty" value="{{ warranty.name }}" {% if warranty.id in selected_warranties %}checked{% endif %}>
+          <label for="{{ warranty.id }}">{{ warranty.name }}</label>
+        </div>
+      {% endfor %}
+  
+      <h4>Brands:</h4>
+      {% for brand in brands %}
+        <div>
+          <input type="checkbox" id="{{ brand.id }}" name="brand" value="{{ brand.name }}" {% if brand.id in selected_brands %}checked{% endif %}>
+          <label for="{{ brand.id }}">{{ brand.name }}</label>
+        </div>
+      {% endfor %}
+  
+      <button type="submit">Filter</button>
+    </form>
+  </div>
+  
+  <div class="product-grid">
+    {% for product in page_obj %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price }}</p>
+        <a href="#">Add to Cart</a>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span class="current-page">{{ page_obj.number }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+  
+  
+</div>
+  
+
+{% endblock content %}
+

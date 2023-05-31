@@ -1,7 +1,11 @@
 <div class="navbar">
+    
     <div class="navbar-brand">
+    <a href="{% url 'home' %}">
         My Shop
+    </a>
     </div>
+   
     <input type="text" class="search-bar" placeholder="Search...">
     <div>
         <a href="#" class="cart-link">Cart</a>
@@ -9,9 +13,8 @@
     <div>
         {% if request.user.is_authenticated %}
         <div class="header__user">
-            <<a href="#">
+            <a href="#">
                 <img src="" alt="avatar"/>
-                <p>sign up</p>
             </a>
         </div>
         {% else %}
