@@ -12,24 +12,23 @@ def home(request):
     warranties = Warranty.objects.all()
 
 
-    # Filter products based on query parameters
-    name = request.GET.get('name')
-    category = request.GET.get('category')
-    brand = request.GET.get('brand')
-    seller = request.GET.get('seller')
-    warranty = request.GET.get('warranty')
+    name = request.GET.getlist('name')
+    category = request.GET.getlist('category')
+    brand = request.GET.getlist('brand')
+    seller = request.GET.getlist('seller')
+    warranty = request.GET.getlist('warranty')
     
 
     if name:
-        products = products.filter(name__icontains=name)
+        products = products.filter(name__in=name)
     if category:
-        products = products.filter(category__name__icontains=category)
+        products = products.filter(category__name__in=category)
     if brand:
-        products = products.filter(brand__name__icontains=brand)
+        products = products.filter(brand__name__in=brand)
     if seller:
-        products = products.filter(seller__name__icontains=seller)
+        products = products.filter(seller__name__in=seller)
     if warranty:
-        products = products.filter(warranty__name__icontains=warranty)
+        products = products.filter(warranty__name__in=warranty)
 
     paginator = Paginator(products, 16)
     page_number = request.GET.get('page')
